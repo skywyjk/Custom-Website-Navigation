@@ -72,7 +72,7 @@ if ($LASTEXITCODE -eq 0) {
     $outputDir = Join-Path $PSScriptRoot 'output'
     Write-Host ''
     Write-Host 'Installer built successfully!' -ForegroundColor Green
-    Write-Host "Output: $outputDir\sky銇嚜瀹氫箟瀵艰埅Setup.exe" -ForegroundColor Green
+    Write-Host "Output: $outputDir\skyの自定义导航Setup.exe" -ForegroundColor Green
 } else {
     Write-Host ''
     Write-Host 'Installer build failed!' -ForegroundColor Red
