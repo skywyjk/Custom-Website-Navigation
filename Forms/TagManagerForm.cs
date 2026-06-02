@@ -1,5 +1,6 @@
 using WebNavigator.Models;
 using WebNavigator.Services;
+using WebNavigator.Utils;
 
 namespace WebNavigator.Forms;
 
@@ -28,11 +29,7 @@ public partial class TagManagerForm : Form
         this.MinimizeBox = false;
         this.BackColor = Color.White;
 
-        var iconPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo.ico");
-        if (File.Exists(iconPath))
-        {
-            this.Icon = new Icon(iconPath);
-        }
+        this.Icon = ResourceHelper.GetEmbeddedIcon();
 
         var titleLabel = new Label
         {
@@ -445,11 +442,7 @@ public class TagEditForm : Form
         this.MinimizeBox = false;
         this.BackColor = Color.White;
 
-        var iconPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo.ico");
-        if (File.Exists(iconPath))
-        {
-            this.Icon = new Icon(iconPath);
-        }
+        this.Icon = ResourceHelper.GetEmbeddedIcon();
 
         var label = new Label
         {
@@ -537,11 +530,7 @@ public class WebsiteSelectForm : Form
         this.MinimizeBox = false;
         this.BackColor = Color.White;
 
-        var iconPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo.ico");
-        if (File.Exists(iconPath))
-        {
-            this.Icon = new Icon(iconPath);
-        }
+        this.Icon = ResourceHelper.GetEmbeddedIcon();
 
         var titleLabel = new Label
         {

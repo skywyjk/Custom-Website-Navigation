@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using WebNavigator.Models;
 using WebNavigator.Services;
+using WebNavigator.Utils;
 
 namespace WebNavigator.Forms;
 
@@ -27,11 +28,7 @@ public partial class MainForm : Form
         this.MinimumSize = new Size(800, 600);
         this.BackColor = Color.FromArgb(240, 242, 245);
 
-        var iconPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo.ico");
-        if (File.Exists(iconPath))
-        {
-            this.Icon = new Icon(iconPath);
-        }
+        this.Icon = ResourceHelper.GetEmbeddedIcon();
 
         var topPanel = new Panel
         {

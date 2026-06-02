@@ -11,15 +11,21 @@
 - 🖼️ 网站 Logo 自动管理，自动复制到 logos 文件夹
 - ➕ 支持添加、编辑、删除网站
 - 🔗 点击「前往」按钮直接打开对应网站
-- 🛡️ 设计上避免杀毒软件误报
+- 🔑 管理员权限 - 程序默认以管理员权限运行
+- 🖥️ 窗口置顶 - 安装/卸载窗口始终置顶显示
+- 🗑️ 完整卸载 - 卸载时彻底删除所有相关文件
+- 🚀 自动启动 - 安装完成后自动启动应用
 
 ## 项目结构
 
 ```
 webdh/
 ├── WebNavigator.csproj    # 项目文件
+├── WebNavigator.sln       # 解决方案文件
 ├── logo.ico               # 程序图标
 ├── Program.cs             # 程序入口
+├── config.json            # 默认配置文件
+├── LICENSE.txt            # 许可证文件
 ├── Models/
 │   ├── WebsiteItem.cs     # 网站数据模型
 │   └── AppConfig.cs       # 配置数据模型
@@ -29,10 +35,15 @@ webdh/
 │   ├── MainForm.cs        # 主窗体
 │   ├── EditForm.cs        # 添加/编辑网站窗体
 │   └── TagManagerForm.cs  # 标签管理窗体
+├── Utils/
+│   └── ResourceHelper.cs  # 资源辅助工具
 ├── install/               # 安装程序
 │   ├── install.iss        # Inno Setup 脚本
-│   ├── build_installer.ps1 # 构建脚本
-│   └── build_installer.bat
+│   ├── build_installer.ps1 # PowerShell 构建脚本
+│   ├── build_installer.bat # 批处理构建脚本
+│   ├── languages/         # 语言文件目录
+│   │   └── ChineseSimplified.isl
+│   └── output/            # 安装包输出目录
 └── publish/               # 发布输出目录
 ```
 
@@ -63,7 +74,7 @@ dotnet publish -c Release -o publish
 
 ### 前置要求
 
-- 安装 [Inno Setup 6](https://jrsoftware.org/isdl.php)
+- 安装 [Inno Setup 7](https://jrsoftware.org/isdl.php)（推荐使用最新版本）
 
 ### 构建步骤
 
@@ -72,7 +83,17 @@ cd install
 build_installer.bat
 ```
 
-安装程序会输出到 `output/WebNavigatorSetup.exe`
+安装程序会输出到 `install/output/文件名`
+
+### 安装程序特性
+
+- ✅ **管理员权限**：安装程序需要管理员权限运行
+- ✅ **默认创建桌面快捷方式**：安装时自动创建桌面快捷方式
+- ✅ **程序以管理员权限运行**：WebNavigator.exe 默认以管理员权限启动
+- ✅ **卸载程序以管理员权限运行**：卸载程序默认以管理员权限启动
+- ✅ **窗口置顶**：安装和卸载窗口始终置顶显示
+- ✅ **完整卸载**：卸载时彻底删除安装目录及其所有内容（包括 config 和 logo 文件夹）
+- ✅ **安装后自动启动**：安装完成后自动启动应用程序
 
 ## 配置文件说明
 
@@ -98,10 +119,5 @@ build_installer.bat
 }
 ```
 
-## 避免杀毒软件误报的设计
+##
 
-1. **不使用单文件发布** - 避免被误认为是打包的恶意程序
-2. **不使用 ReadyToRun** - 避免复杂的编译优化导致误报
-3. **清晰的命名空间和类名** - 避免可疑的命名
-4. **正常的文件操作** - 只操作自身目录下的文件
-5. **不包含可疑功能** - 只做网站导航相关功能

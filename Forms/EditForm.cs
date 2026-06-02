@@ -1,5 +1,6 @@
 using WebNavigator.Models;
 using WebNavigator.Services;
+using WebNavigator.Utils;
 
 namespace WebNavigator.Forms;
 
@@ -51,11 +52,7 @@ public partial class EditForm : Form
         this.MinimizeBox = false;
         this.BackColor = Color.White;
 
-        var iconPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo.ico");
-        if (File.Exists(iconPath))
-        {
-            this.Icon = new Icon(iconPath);
-        }
+        this.Icon = ResourceHelper.GetEmbeddedIcon();
 
         var padding = 30;
         var y = padding;

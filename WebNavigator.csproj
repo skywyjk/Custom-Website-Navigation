@@ -24,9 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="logo.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
