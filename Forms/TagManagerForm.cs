@@ -260,15 +260,14 @@ public partial class TagManagerForm : Form
             var deleteWidth = subItemBounds.Width - editWidth - 4;
             var font = e.Item?.Font ?? _tagListView.Font ?? System.Drawing.SystemFonts.DefaultFont;
 
-            var editBrush = new SolidBrush(Color.FromArgb(51, 102, 255));
-            var deleteBrush = new SolidBrush(Color.FromArgb(217, 83, 79));
-            var whiteBrush = Brushes.White;
+            using var editBrush = new SolidBrush(Color.FromArgb(51, 102, 255));
+            using var deleteBrush = new SolidBrush(Color.FromArgb(217, 83, 79));
 
             e.Graphics.FillRectangle(editBrush, subItemBounds.X + 2, subItemBounds.Y + 2, editWidth, subItemBounds.Height - 4);
-            e.Graphics.DrawString("编辑", font, whiteBrush, subItemBounds.X + 12, subItemBounds.Y + 4);
+            e.Graphics.DrawString("编辑", font, Brushes.White, subItemBounds.X + 12, subItemBounds.Y + 4);
 
             e.Graphics.FillRectangle(deleteBrush, subItemBounds.X + editWidth + 6, subItemBounds.Y + 2, deleteWidth, subItemBounds.Height - 4);
-            e.Graphics.DrawString("删除", font, whiteBrush, subItemBounds.X + editWidth + 16, subItemBounds.Y + 4);
+            e.Graphics.DrawString("删除", font, Brushes.White, subItemBounds.X + editWidth + 16, subItemBounds.Y + 4);
         }
         else
         {
