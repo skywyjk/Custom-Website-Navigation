@@ -56,8 +56,8 @@ public partial class EditForm : Form
 
         var padding = 30;
         var y = padding;
-        var labelWidth = 80;
-        var inputWidth = 320;
+        var labelWidth = 100;
+        var inputWidth = 300;
 
         var nameLabel = new Label
         {
@@ -69,7 +69,7 @@ public partial class EditForm : Form
 
         _nameTextBox = new TextBox
         {
-            Location = new Point(padding + labelWidth + 10, y),
+            Location = new Point(padding + labelWidth + 15, y),
             Size = new Size(inputWidth, 30),
             Font = new Font("Microsoft YaHei UI", 10F),
             BorderStyle = BorderStyle.FixedSingle
@@ -87,7 +87,7 @@ public partial class EditForm : Form
 
         _urlTextBox = new TextBox
         {
-            Location = new Point(padding + labelWidth + 10, y),
+            Location = new Point(padding + labelWidth + 15, y),
             Size = new Size(inputWidth, 30),
             Font = new Font("Microsoft YaHei UI", 10F),
             BorderStyle = BorderStyle.FixedSingle,
@@ -95,40 +95,6 @@ public partial class EditForm : Form
         };
 
         y += 50;
-
-        var logoLabel = new Label
-        {
-            Text = "Logo",
-            Location = new Point(padding, y),
-            Size = new Size(labelWidth, 25),
-            Font = new Font("Microsoft YaHei UI", 10F)
-        };
-
-        var browseButton = new Button
-        {
-            Text = "浏览",
-            Location = new Point(padding + labelWidth + 10, y),
-            Size = new Size(80, 30),
-            BackColor = Color.FromArgb(248, 249, 250),
-            ForeColor = Color.FromArgb(51, 51, 51),
-            FlatStyle = FlatStyle.Flat,
-            Cursor = Cursors.Hand
-        };
-        browseButton.FlatAppearance.BorderSize = 0;
-        browseButton.Click += BrowseButton_Click;
-
-        y += 50;
-
-        _logoPreview = new PictureBox
-        {
-            Location = new Point(padding + labelWidth + 10, y),
-            Size = new Size(100, 100),
-            BackColor = Color.FromArgb(245, 245, 245),
-            BorderStyle = BorderStyle.FixedSingle,
-            SizeMode = PictureBoxSizeMode.Zoom
-        };
-
-        y += 120;
 
         var descLabel = new Label
         {
@@ -140,7 +106,7 @@ public partial class EditForm : Form
 
         _descTextBox = new TextBox
         {
-            Location = new Point(padding + labelWidth + 10, y),
+            Location = new Point(padding + labelWidth + 15, y),
             Size = new Size(inputWidth, 80),
             Font = new Font("Microsoft YaHei UI", 10F),
             BorderStyle = BorderStyle.FixedSingle,
@@ -149,6 +115,40 @@ public partial class EditForm : Form
         };
 
         y += 110;
+
+        var logoLabel = new Label
+        {
+            Text = "Logo",
+            Location = new Point(padding, y),
+            Size = new Size(labelWidth, 25),
+            Font = new Font("Microsoft YaHei UI", 10F)
+        };
+
+        _logoPreview = new PictureBox
+        {
+            Location = new Point(padding + labelWidth + 15, y),
+            Size = new Size(100, 100),
+            BackColor = Color.FromArgb(245, 245, 245),
+            BorderStyle = BorderStyle.FixedSingle,
+            SizeMode = PictureBoxSizeMode.Zoom
+        };
+
+        y += 120;
+
+        var browseButton = new Button
+        {
+            Text = "浏览",
+            Location = new Point(padding + labelWidth + 15, y),
+            Size = new Size(80, 30),
+            BackColor = Color.FromArgb(248, 249, 250),
+            ForeColor = Color.FromArgb(51, 51, 51),
+            FlatStyle = FlatStyle.Flat,
+            Cursor = Cursors.Hand
+        };
+        browseButton.FlatAppearance.BorderSize = 0;
+        browseButton.Click += BrowseButton_Click;
+
+        y += 50;
 
         var tagLabel = new Label
         {
@@ -160,7 +160,7 @@ public partial class EditForm : Form
 
         _tagComboBox = new ComboBox
         {
-            Location = new Point(padding + labelWidth + 10, y),
+            Location = new Point(padding + labelWidth + 15, y),
             Size = new Size(200, 30),
             Font = new Font("Microsoft YaHei UI", 10F),
             DropDownStyle = ComboBoxStyle.DropDownList,
@@ -178,7 +178,7 @@ public partial class EditForm : Form
 
         _tagInputTextBox = new TextBox
         {
-            Location = new Point(padding + labelWidth + 10, y),
+            Location = new Point(padding + labelWidth + 15, y),
             Size = new Size(200, 30),
             Font = new Font("Microsoft YaHei UI", 10F),
             BorderStyle = BorderStyle.FixedSingle,
@@ -189,7 +189,7 @@ public partial class EditForm : Form
         var addTagButton = new Button
         {
             Text = "添加",
-            Location = new Point(padding + labelWidth + 10 + 210, y),
+            Location = new Point(padding + labelWidth + 15 + 210, y),
             Size = new Size(60, 30),
             BackColor = Color.FromArgb(24, 144, 255),
             ForeColor = Color.White,
@@ -204,7 +204,7 @@ public partial class EditForm : Form
 
         _tagContainer = new Panel
         {
-            Location = new Point(padding + labelWidth + 10, y),
+            Location = new Point(padding + labelWidth + 15, y),
             Size = new Size(370, 80),
             AutoScroll = true,
             BorderStyle = BorderStyle.FixedSingle,

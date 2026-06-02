@@ -12,7 +12,9 @@ public partial class MainForm : Form
     private FlowLayoutPanel _websitePanel = null!;
     private FlowLayoutPanel _tagFilterPanel = null!;
     private Button _addButton = null!;
+    private TextBox _searchBox = null!;
     private string? _selectedTag = null;
+    private string _searchText = string.Empty;
 
     public MainForm()
     {
@@ -56,6 +58,28 @@ public partial class MainForm : Form
             AutoSize = true
         };
 
+        _searchBox = new TextBox
+        {
+            PlaceholderText = "搜索网站...",
+            Font = new Font("Microsoft YaHei UI", 11F),
+            Size = new Size(400, 36),
+            Location = new Point(0, 17),
+            BorderStyle = BorderStyle.FixedSingle,
+            Padding = new Padding(10, 0, 35, 0),
+            ForeColor = Color.FromArgb(51, 51, 51)
+        };
+        _searchBox.TextChanged += SearchBox_TextChanged;
+
+        var searchIcon = new Label
+        {
+            Text = "🔍",
+            Font = new Font("Segoe UI Symbol", 12F),
+            Size = new Size(20, 20),
+            Location = new Point(0, 22),
+            TextAlign = ContentAlignment.MiddleCenter,
+            BackColor = Color.Transparent
+        };
+
         _addButton = new Button
         {
             Text = "➕ 添加网站",
@@ -83,15 +107,21 @@ public partial class MainForm : Form
         tagManagerButton.Click += TagManagerButton_Click;
 
         topPanel.Controls.Add(titleLabel);
+        topPanel.Controls.Add(_searchBox);
+        topPanel.Controls.Add(searchIcon);
         topPanel.Controls.Add(tagManagerButton);
         topPanel.Controls.Add(_addButton);
 
         _addButton.Location = new Point(topPanel.Width - _addButton.Width - 20, 15);
         tagManagerButton.Location = new Point(_addButton.Left - tagManagerButton.Width - 10, 15);
+        _searchBox.Location = new Point((topPanel.Width - _searchBox.Width) / 2, 17);
+        searchIcon.Location = new Point(_searchBox.Left + _searchBox.Width - 30, 22);
         topPanel.Resize += (s, e) =>
         {
             _addButton.Location = new Point(topPanel.Width - _addButton.Width - 20, 15);
             tagManagerButton.Location = new Point(_addButton.Left - tagManagerButton.Width - 10, 15);
+            _searchBox.Location = new Point((topPanel.Width - _searchBox.Width) / 2, 17);
+            searchIcon.Location = new Point(_searchBox.Left + _searchBox.Width - 30, 22);
         };
 
         _websitePanel = new FlowLayoutPanel
@@ -169,15 +199,34 @@ public partial class MainForm : Form
     {
         _websitePanel.Controls.Clear();
 
-        IEnumerable<WebsiteItem> filteredWebsites = string.IsNullOrEmpty(_selectedTag)
-            ? _config.Websites
-            : _config.Websites.Where(w => w.Tags.Contains(_selectedTag));
+        IEnumerable<WebsiteItem> filteredWebsites = _config.Websites;
+
+        if (!string.IsNullOrEmpty(_selectedTag))
+        {
+            filteredWebsites = filteredWebsites.Where(w => w.Tags.Contains(_selectedTag));
+        }
+
+        if (!string.IsNullOrEmpty(_searchText))
+        {
+            var searchLower = _searchText.ToLower();
+            filteredWebsites = filteredWebsites.Where(w =>
+                w.Name.ToLower().Contains(searchLower) ||
+                w.Description.ToLower().Contains(searchLower) ||
+                w.Url.ToLower().Contains(searchLower) ||
+                w.Tags.Any(t => t.ToLower().Contains(searchLower)));
+        }
 
         foreach (var website in filteredWebsites)
         {
             var card = CreateWebsiteCard(website);
             _websitePanel.Controls.Add(card);
         }
+    }
+
+    private void SearchBox_TextChanged(object? sender, EventArgs e)
+    {
+        _searchText = _searchBox.Text.Trim();
+        RenderWebsites();
     }
 
     private Panel CreateWebsiteCard(WebsiteItem website)
