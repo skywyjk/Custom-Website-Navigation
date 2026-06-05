@@ -3,19 +3,21 @@ AppId={{138028de-1249-49ed-961e-ea3187f3d557}}
 AppName=skyの自定义网站导航
 PrivilegesRequired=admin
 AppVersion=1.0.0
-AppPublisher=sky
+AppPublisher=Sky
 DefaultDirName={autopf}\skyの自定义网站导航
 DefaultGroupName=skyの自定义网站导航
 UninstallDisplayIcon={app}\WebNavigator.exe
 OutputDir=output
 OutputBaseFilename=skyの自定义导航Setup
 SetupIconFile=..\logo.ico
-Compression=lzma
+Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
 DisableProgramGroupPage=no
 AllowNoIcons=yes
 UsePreviousAppDir=no
+ArchitecturesAllowed=x64compatible
+ArchitecturesInstallIn64BitMode=x64compatible
 
 [Languages]
 Name: "chinesesimplified"; MessagesFile: "languages\ChineseSimplified.isl"
@@ -27,8 +29,8 @@ Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: 
 Source: "..\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Registry]
-Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\WebNavigator.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
-Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\unins000.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
+Root: "HKLM"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\WebNavigator.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
+Root: "HKLM"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\unins000.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
 
 [Icons]
 Name: "{group}\sky导航"; Filename: "{app}\WebNavigator.exe"
