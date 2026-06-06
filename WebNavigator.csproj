@@ -7,14 +7,15 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>logo.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
     <AssemblyName>WebNavigator</AssemblyName>
     <RootNamespace>WebNavigator</RootNamespace>
     <Version>1.0.0</Version>
-    <Authors>WebNavigator</Authors>
-    <Company>WebNavigator</Company>
-    <Product>WebNavigator</Product>
-    <Description>网站导航器</Description>
-    <Copyright>Copyright © 2026</Copyright>
+    <Authors>Sky</Authors>
+    <Company>Sky</Company>
+    <Product>skyの自定义导航</Product>
+    <Description>skyの自定义网站导航</Description>
+    <Copyright>Copyright © 2026 Sky</Copyright>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <DebugType>embedded</DebugType>
     <Deterministic>false</Deterministic>
