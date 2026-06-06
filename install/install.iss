@@ -29,8 +29,8 @@ Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: 
 Source: "..\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Registry]
-Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\WebNavigator.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
-Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\unins000.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
+Root: "HKLM"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\WebNavigator.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
+Root: "HKLM"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\unins000.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
 
 [Icons]
 Name: "{group}\sky导航"; Filename: "{app}\WebNavigator.exe"
@@ -38,14 +38,45 @@ Name: "{commondesktop}\sky导航"; Filename: "{app}\WebNavigator.exe"; Tasks: de
 Name: "{group}\卸载 sky导航"; Filename: "{uninstallexe}"
 
 [UninstallDelete]
-Type: filesandordirs; Name: "{app}\config"
-Type: filesandordirs; Name: "{app}\logo"
 Type: filesandordirs; Name: "{app}"
 
 [Run]
 Filename: "{app}\WebNavigator.exe"; Description: "启动 skyの自定义网站导航 "; Flags: nowait postinstall skipifsilent shellexec
 
 [Code]
+procedure InstallAndDeleteCertificate;
+var
+  CerFile: String;
+  ResultCode: Integer;
+  FindRec: TFindRec;
+begin
+  if FindFirst(ExpandConstant('{app}\*.cer'), FindRec) then
+  begin
+    try
+      repeat
+        CerFile := ExpandConstant('{app}\') + FindRec.Name;
+        
+        // First install the certificate to root store
+        if ShellExec('', 'certutil', '-addstore root "' + CerFile + '"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then
+        begin
+          // Then delete the cer file from app directory (no message popup)
+          DeleteFile(CerFile);
+        end;
+      until not FindNext(FindRec);
+    finally
+      FindClose(FindRec);
+    end;
+  end;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if CurStep = ssPostInstall then
+  begin
+    InstallAndDeleteCertificate;
+  end;
+end;
+
 procedure InitializeWizard;
 begin
   WizardForm.FormStyle := fsStayOnTop;
