@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 # Inno Setup build output
 install/output/
+
+# Sign directory (contains private keys)
+install/sign/

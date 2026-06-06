@@ -29,8 +29,8 @@ Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: 
 Source: "..\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Registry]
-Root: "HKLM"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\WebNavigator.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
-Root: "HKLM"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\unins000.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
+Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\WebNavigator.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
+Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\unins000.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
 
 [Icons]
 Name: "{group}\sky导航"; Filename: "{app}\WebNavigator.exe"
